@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double-Dice Roller</title>
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="css/dice.css">
+    <!-- Script JS -->
+	<script src="js/jquery.min.js"></script>
+    <script src="js/dice.js"></script>
+<style>
+.dice-one {
+    position: absolute;
+    left: 50px;
+    top: 10px;
+}
+
+.dice-two {
+    position: absolute;
+    top: 10px;
+    left: 250px;
+}
+</style>
+<script>
+let diceOne, diceTwo;
+function rollDice()
+{
+	if (!diceOne)
+	{
+		diceOne = new Dice('dice1', true);
+		diceTwo = new Dice('dice2', true);
+	}
+	diceOne.roll();
+	diceTwo.roll();
+	console.log(diceOne.val, diceTwo.val);
+}
+$(document).ready(() => {
+	const div = $('.game-container');
+	div.append($(Dice.html('dice1')));
+	div.append($(Dice.html('dice2')));
+	$(document).ready(() => {
+		if (!diceOne)
+		{
+			//diceOne = new Dice('dice1', true, () => { Dice.rollDice('dice2'); });
+			//diceTwo = new Dice('dice2', true, () => { Dice.rollDice('dice1'); });
+			diceOne = new Dice('dice1', true);
+			diceTwo = new Dice('dice2', true);
+			diceOne.link(diceTwo);
+		}
+	});
+});
+</script>
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+            <h1>Double-Dice Roller</h1>
+
+            <div class="game-container">
+            </div>
+
+            <div id='roll' class='roll-button' onclick='rollDice();'><button>Roll dice!</button></div>
+        </div>
+    </div>
+</body>
+</html>

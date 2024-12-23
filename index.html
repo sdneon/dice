@@ -6,50 +6,38 @@
     <title>Double-Dice Roller</title>
 
     <!-- Style CSS -->
+    <link rel="stylesheet" href="css/demo.css">
     <link rel="stylesheet" href="css/dice.css">
     <!-- Script JS -->
-	<script src="js/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="js/dice.js"></script>
-<style>
-.dice-one {
-    position: absolute;
-    left: 50px;
-    top: 10px;
-}
-
-.dice-two {
-    position: absolute;
-    top: 10px;
-    left: 250px;
-}
-</style>
 <script>
 let diceOne, diceTwo;
 function rollDice()
 {
-	if (!diceOne)
-	{
-		diceOne = new Dice('dice1', true);
-		diceTwo = new Dice('dice2', true);
-	}
-	diceOne.roll();
-	diceTwo.roll();
-	console.log(diceOne.val, diceTwo.val);
+    if (!diceOne)
+    {
+        diceOne = new Dice('dice1', true);
+        diceTwo = new Dice('dice2', true);
+    }
+    diceOne.roll();
+    diceTwo.roll();
+    console.log(diceOne.val, diceTwo.val);
 }
 $(document).ready(() => {
-	const div = $('.game-container');
-	div.append($(Dice.html('dice1')));
-	div.append($(Dice.html('dice2')));
-	$(document).ready(() => {
-		if (!diceOne)
-		{
-			//diceOne = new Dice('dice1', true, () => { Dice.rollDice('dice2'); });
-			//diceTwo = new Dice('dice2', true, () => { Dice.rollDice('dice1'); });
-			diceOne = new Dice('dice1', true);
-			diceTwo = new Dice('dice2', true);
-			diceOne.link(diceTwo);
-		}
-	});
+    const div = $('.game-container');
+    div.append($(Dice.html('dice1')));
+    div.append($(Dice.html('dice2')));
+    $(document).ready(() => {
+        if (!diceOne)
+        {
+            //diceOne = new Dice('dice1', true, () => { Dice.rollDice('dice2'); });
+            //diceTwo = new Dice('dice2', true, () => { Dice.rollDice('dice1'); });
+            diceOne = new Dice('dice1', true);
+            diceTwo = new Dice('dice2', true);
+            diceOne.link(diceTwo);
+        }
+    });
 });
 </script>
 </head>
